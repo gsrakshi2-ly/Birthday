@@ -1,0 +1,738 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise 🎀</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600&family=Sacramento&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fff1f7, #fff9f2, #ffeaf2);
+    color: #6b4655;
+    overflow-x: hidden;
+}
+
+/* ---------- FLOATING PETALS ---------- */
+
+.petals span {
+    position: fixed;
+    top: -30px;
+    font-size: 20px;
+    animation: fall linear infinite;
+    opacity: .7;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.petals span:nth-child(1) { left: 5%; animation-duration: 8s; }
+.petals span:nth-child(2) { left: 15%; animation-duration: 11s; animation-delay: 2s; }
+.petals span:nth-child(3) { left: 28%; animation-duration: 9s; animation-delay: 1s; }
+.petals span:nth-child(4) { left: 42%; animation-duration: 12s; animation-delay: 3s; }
+.petals span:nth-child(5) { left: 58%; animation-duration: 8s; animation-delay: 1s; }
+.petals span:nth-child(6) { left: 72%; animation-duration: 10s; animation-delay: 4s; }
+.petals span:nth-child(7) { left: 87%; animation-duration: 9s; animation-delay: 2s; }
+
+@keyframes fall {
+    0% {
+        transform: translateY(-30px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+/* ---------- OPENING ---------- */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+    position: relative;
+}
+
+.hero-card {
+    background: rgba(255,255,255,.7);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,.8);
+    border-radius: 35px;
+    padding: 65px 45px;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(180, 100, 130, .15);
+    animation: appear 1.2s ease;
+}
+
+.small-title {
+    font-size: 15px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c58a9e;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(55px, 10vw, 95px);
+    color: #a85c78;
+    line-height: .95;
+}
+
+.script {
+    font-family: 'Sacramento', cursive;
+    font-size: 48px;
+    color: #d783a0;
+    margin: 18px 0;
+}
+
+.hero p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.button {
+    border: none;
+    background: #d783a0;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 40px;
+    font-family: 'Poppins';
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(190,100,130,.25);
+    transition: .3s;
+}
+
+.button:hover {
+    transform: translateY(-4px) scale(1.03);
+    background: #c96f91;
+}
+
+.bow {
+    font-size: 45px;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    50% { transform: translateY(-8px); }
+}
+
+/* ---------- SECTIONS ---------- */
+
+section {
+    min-height: 100vh;
+    padding: 90px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-inner {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+}
+
+.section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 7vw, 65px);
+    color: #a85c78;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    margin-bottom: 45px;
+    color: #946879;
+}
+
+/* ---------- BIRTHDAY ---------- */
+
+.birthday-card {
+    background: rgba(255,255,255,.75);
+    border-radius: 35px;
+    padding: 50px 30px;
+    box-shadow: 0 15px 50px rgba(180,100,130,.12);
+}
+
+.cake {
+    font-size: 100px;
+    animation: cakeBounce 2s infinite;
+    margin: 20px;
+}
+
+@keyframes cakeBounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.checks {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.check {
+    background: #fff0f5;
+    padding: 12px 18px;
+    border-radius: 30px;
+}
+
+/* ---------- CARD ---------- */
+
+.card-wrapper {
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+}
+
+.birthday-card-open {
+    width: 340px;
+    height: 230px;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+.card-front,
+.card-inside {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    backface-visibility: hidden;
+    box-shadow: 0 15px 40px rgba(160,90,120,.15);
+}
+
+.card-front {
+    background: linear-gradient(135deg, #e99bb5, #d783a0);
+    color: white;
+    font-family: 'DM Serif Display';
+    font-size: 35px;
+    transition: transform .8s;
+}
+
+.card-inside {
+    background: #fffaf5;
+    transform: rotateY(180deg);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.birthday-card-open.open .card-front {
+    transform: rotateY(-180deg);
+}
+
+.birthday-card-open.open .card-inside {
+    transform: rotateY(0deg);
+}
+
+/* ---------- GIFTS ---------- */
+
+.gifts {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.gift {
+    width: 190px;
+    height: 190px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(170,90,120,.12);
+    transition: .3s;
+}
+
+.gift:hover {
+    transform: translateY(-8px) rotate(1deg);
+}
+
+.gift-icon {
+    font-size: 65px;
+    margin-bottom: 10px;
+}
+
+.gift p {
+    font-weight: 500;
+}
+
+.message {
+    margin-top: 35px;
+    min-height: 30px;
+    font-size: 18px;
+    color: #b05e7d;
+    font-weight: 500;
+}
+
+/* ---------- FLOWERS ---------- */
+
+.garden {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.flower {
+    font-size: 55px;
+    cursor: pointer;
+    transition: .4s;
+    filter: grayscale(50%);
+}
+
+.flower:hover {
+    transform: scale(1.15);
+}
+
+.flower.bloom {
+    filter: grayscale(0);
+    transform: scale(1.25) rotate(8deg);
+}
+
+.flower-note {
+    margin-top: 30px;
+    font-size: 18px;
+    min-height: 30px;
+    color: #b05e7d;
+}
+
+/* ---------- FINAL ---------- */
+
+.final {
+    min-height: 100vh;
+    text-align: center;
+}
+
+.final .cake {
+    font-size: 120px;
+}
+
+.final h2 {
+    font-family: 'DM Serif Display';
+    font-size: clamp(45px, 8vw, 75px);
+    color: #a85c78;
+}
+
+.final p {
+    margin: 20px auto;
+    max-width: 500px;
+}
+
+.footer {
+    margin-top: 45px;
+    font-family: 'Sacramento';
+    font-size: 35px;
+    color: #d783a0;
+}
+
+/* ---------- CONFETTI ---------- */
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 15px;
+    top: -20px;
+    z-index: 100;
+    pointer-events: none;
+    animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media(max-width:600px) {
+    .hero-card {
+        padding: 45px 25px;
+    }
+
+    .gift {
+        width: 150px;
+        height: 160px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- FLOATING FLOWERS -->
+<div class="petals">
+    <span>🌸</span>
+    <span>🌷</span>
+    <span>🌸</span>
+    <span>🌺</span>
+    <span>🌷</span>
+    <span>🌸</span>
+    <span>🌺</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-card">
+
+        <div class="bow">🎀</div>
+
+        <div class="small-title">
+            A little birthday surprise
+        </div>
+
+        <h1>It's Your<br>Birthday!</h1>
+
+        <div class="script">
+            Let's celebrate ✨
+        </div>
+
+        <p>
+            Cake, flowers, surprises and absolutely no stress today. 💗
+        </p>
+
+        <button class="button" onclick="startParty()">
+            🎁 Open Surprise
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- BIRTHDAY -->
+<section>
+
+    <div class="section-inner">
+
+        <div class="birthday-card">
+
+            <div class="small-title">
+                TODAY'S SPECIAL ANNOUNCEMENT
+            </div>
+
+            <h2 class="section-title">
+                HAPPY BIRTHDAY! 🎂
+            </h2>
+
+            <div class="cake">
+                🎂
+            </div>
+
+            <p>
+                Today is officially your day. 💗
+            </p>
+
+            <div class="checks">
+                <div class="check">🎂 Cake ✔️</div>
+                <div class="check">🌷 Flowers ✔️</div>
+                <div class="check">🎁 Surprises ✔️</div>
+                <div class="check">😌 No Stress ✔️</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CARD -->
+<section>
+
+    <div class="section-inner">
+
+        <div class="small-title">
+            OPEN YOUR CARD
+        </div>
+
+        <h2 class="section-title">
+            A Little Birthday Note 💌
+        </h2>
+
+        <p class="subtitle">
+            Click the card...
+        </p>
+
+        <div class="card-wrapper">
+
+            <div class="birthday-card-open" onclick="openCard(this)">
+
+                <div class="card-front">
+                    🎀 For You 🎀
+                </div>
+
+                <div class="card-inside">
+                    <p>
+                        <strong>Happy Birthday! 🌸</strong><br><br>
+                        Wishing you a day filled with good food,
+                        pretty flowers, lots of laughter,
+                        and absolutely no unnecessary stress. 😌
+                        <br><br>
+                        Enjoy your day! 💗
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GIFTS -->
+<section>
+
+    <div class="section-inner">
+
+        <div class="small-title">
+            THREE LITTLE SURPRISES
+        </div>
+
+        <h2 class="section-title">
+            Pick a Gift 🎁
+        </h2>
+
+        <p class="subtitle">
+            Go on... click one.
+        </p>
+
+        <div class="gifts">
+
+            <div class="gift" onclick="giftMessage(1)">
+                <div class="gift-icon">🎀</div>
+                <p>Open Me</p>
+            </div>
+
+            <div class="gift" onclick="giftMessage(2)">
+                <div class="gift-icon">🌷</div>
+                <p>Another One</p>
+            </div>
+
+            <div class="gift" onclick="giftMessage(3)">
+                <div class="gift-icon">✨</div>
+                <p>Last One</p>
+            </div>
+
+        </div>
+
+        <div class="message" id="giftMessage"></div>
+
+    </div>
+
+</section>
+
+
+<!-- FLOWER GARDEN -->
+<section>
+
+    <div class="section-inner">
+
+        <div class="small-title">
+            A LITTLE GARDEN
+        </div>
+
+        <h2 class="section-title">
+            Make the Flowers Bloom 🌷
+        </h2>
+
+        <p class="subtitle">
+            Click the flowers!
+        </p>
+
+        <div class="garden">
+
+            <div class="flower" onclick="bloom(this)">🌷</div>
+            <div class="flower" onclick="bloom(this)">🌸</div>
+            <div class="flower" onclick="bloom(this)">🌺</div>
+            <div class="flower" onclick="bloom(this)">🌷</div>
+            <div class="flower" onclick="bloom(this)">🌸</div>
+
+        </div>
+
+        <div class="flower-note" id="flowerNote"></div>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL -->
+<section class="final">
+
+    <div class="section-inner">
+
+        <div class="cake">
+            🎂
+        </div>
+
+        <h2>
+            Birthday Mode:<br>ON 🎉
+        </h2>
+
+        <p>
+            Cake? ✔️<br>
+            Flowers? ✔️<br>
+            Birthday wishes? ✔️<br>
+            Having fun? <strong>REQUIRED. 😌</strong>
+        </p>
+
+        <div class="footer">
+            Happy Birthday! 💗✨
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* ---------- START PARTY ---------- */
+
+function startParty() {
+
+    createConfetti();
+
+    setTimeout(() => {
+        document.querySelectorAll("section")[1]
+            .scrollIntoView({ behavior: "smooth" });
+    }, 500);
+}
+
+
+/* ---------- CONFETTI ---------- */
+
+function createConfetti() {
+
+    const emojis = ["🌸", "✨", "🎀", "💗", "🌷", "🎉"];
+
+    for(let i = 0; i < 45; i++) {
+
+        const piece = document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.innerText =
+            emojis[Math.floor(Math.random() * emojis.length)];
+
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+        piece.style.animationDuration =
+            (2 + Math.random() * 2) + "s";
+
+        piece.style.fontSize =
+            (10 + Math.random() * 15) + "px";
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => {
+            piece.remove();
+        }, 4000);
+    }
+}
+
+
+/* ---------- CARD ---------- */
+
+function openCard(card) {
+    card.classList.toggle("open");
+}
+
+
+/* ---------- GIFTS ---------- */
+
+function giftMessage(number) {
+
+    const message = document.getElementById("giftMessage");
+
+    const messages = {
+
+        1: "🎀 Surprise! Today you officially deserve to be spoiled.",
+
+        2: "🌷 Surprise! Here's a whole bunch of imaginary flowers for you.",
+
+        3: "✨ Final surprise! Your only job today is to enjoy yourself."
+    };
+
+    message.innerText = messages[number];
+
+}
+
+
+/* ---------- FLOWERS ---------- */
+
+let flowersBloomed = 0;
+
+function bloom(flower) {
+
+    if(!flower.classList.contains("bloom")) {
+
+        flower.classList.add("bloom");
+
+        flowersBloomed++;
+
+        if(flowersBloomed === 5) {
+
+            document.getElementById("flowerNote").innerText =
+                "🌸 The whole garden is blooming! Happy Birthday! 💗";
+
+            createConfetti();
+
+        } else {
+
+            document.getElementById("flowerNote").innerText =
+                "🌷 Pretty! Keep going...";
+        }
+    }
+}
+
+</script>
+
+</body>
+</html>
+```
